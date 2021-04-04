@@ -1,2 +1,2 @@
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://jaxws/")
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://client.generated/")
 package client.generated;

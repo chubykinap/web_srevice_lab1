@@ -28,13 +28,55 @@ public interface FlightService {
      * 
      * @param arg0
      * @return
-     *     returns java.util.List<client.generated.Flight>
+     *     returns java.lang.String
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getFlights", targetNamespace = "http://jaxws/", className = "client.generated.GetFlights")
-    @ResponseWrapper(localName = "getFlightsResponse", targetNamespace = "http://jaxws/", className = "client.generated.GetFlightsResponse")
+    @RequestWrapper(localName = "changeFlight", targetNamespace = "http://jaxws/", className = "jaxws.ChangeFlight")
+    @ResponseWrapper(localName = "changeFlightResponse", targetNamespace = "http://jaxws/", className = "jaxws.ChangeFlightResponse")
+    public String changeFlight(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns java.util.List<jaxws.Flight>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getFlights", targetNamespace = "http://jaxws/", className = "jaxws.GetFlights")
+    @ResponseWrapper(localName = "getFlightsResponse", targetNamespace = "http://jaxws/", className = "jaxws.GetFlightsResponse")
     public List<Flight> getFlights(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "deleteFlight", targetNamespace = "http://jaxws/", className = "jaxws.DeleteFlight")
+    @ResponseWrapper(localName = "deleteFlightResponse", targetNamespace = "http://jaxws/", className = "jaxws.DeleteFlightResponse")
+    public String deleteFlight(
+        @WebParam(name = "arg0", targetNamespace = "")
+        int arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns int
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "addFlight", targetNamespace = "http://jaxws/", className = "jaxws.AddFlight")
+    @ResponseWrapper(localName = "addFlightResponse", targetNamespace = "http://jaxws/", className = "jaxws.AddFlightResponse")
+    public int addFlight(
         @WebParam(name = "arg0", targetNamespace = "")
         String arg0);
 

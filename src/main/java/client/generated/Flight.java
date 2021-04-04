@@ -4,9 +4,7 @@ package client.generated;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -22,7 +20,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="aircraft_type" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="arrival_city" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="departure_city" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="departure_date" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
+ *         &lt;element name="departure_date" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="flight_id" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="flight_number" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -38,6 +37,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "arrivalCity",
     "departureCity",
     "departureDate",
+    "flightId",
     "flightNumber"
 })
 public class Flight {
@@ -49,8 +49,9 @@ public class Flight {
     @XmlElement(name = "departure_city")
     protected String departureCity;
     @XmlElement(name = "departure_date")
-    @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar departureDate;
+    protected String departureDate;
+    @XmlElement(name = "flight_id")
+    protected int flightId;
     @XmlElement(name = "flight_number")
     protected String flightNumber;
 
@@ -131,10 +132,10 @@ public class Flight {
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link String }
      *     
      */
-    public XMLGregorianCalendar getDepartureDate() {
+    public String getDepartureDate() {
         return departureDate;
     }
 
@@ -143,11 +144,27 @@ public class Flight {
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link String }
      *     
      */
-    public void setDepartureDate(XMLGregorianCalendar value) {
+    public void setDepartureDate(String value) {
         this.departureDate = value;
+    }
+
+    /**
+     * Gets the value of the flightId property.
+     * 
+     */
+    public int getFlightId() {
+        return flightId;
+    }
+
+    /**
+     * Sets the value of the flightId property.
+     * 
+     */
+    public void setFlightId(int value) {
+        this.flightId = value;
     }
 
     /**

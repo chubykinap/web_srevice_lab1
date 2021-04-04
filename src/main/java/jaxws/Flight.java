@@ -1,10 +1,10 @@
 package jaxws;
 
-import java.util.Date;
-
 public class Flight {
+
+    private int flight_id;
     private String flight_number;
-    private Date departure_date;
+    private String departure_date;
     private String departure_city;
     private String arrival_city;
     private String aircraft_type;
@@ -12,8 +12,18 @@ public class Flight {
     public Flight() {
     }
 
-    public Flight(String flight_number, Date departure_date, String departure_city,
+    public Flight(String flight_number, String departure_date, String departure_city,
                   String arrival_city, String aircraft_type) {
+        this.flight_number = flight_number;
+        this.departure_date = departure_date;
+        this.departure_city = departure_city;
+        this.arrival_city = arrival_city;
+        this.aircraft_type = aircraft_type;
+    }
+
+    public Flight(int flight_id, String flight_number, String departure_date, String departure_city,
+                  String arrival_city, String aircraft_type) {
+        this.flight_id = flight_id;
         this.flight_number = flight_number;
         this.departure_date = departure_date;
         this.departure_city = departure_city;
@@ -29,11 +39,11 @@ public class Flight {
         this.flight_number = flight_number;
     }
 
-    public Date getDeparture_date() {
+    public String getDeparture_date() {
         return departure_date;
     }
 
-    public void setDeparture_date(Date departure_date) {
+    public void setDeparture_date(String departure_date) {
         this.departure_date = departure_date;
     }
 
@@ -59,5 +69,13 @@ public class Flight {
 
     public void setAircraft_type(String aircraft_type) {
         this.aircraft_type = aircraft_type;
+    }
+
+    public int getFlight_id() {
+        return flight_id;
+    }
+
+    public void setFlight_id(int flight_id) {
+        this.flight_id = flight_id;
     }
 }
