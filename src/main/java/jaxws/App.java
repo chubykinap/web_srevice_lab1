@@ -5,6 +5,8 @@ import javax.xml.ws.Endpoint;
 public class App {
 
     public static void main(String[] args){
+        Endpoint ep = Endpoint.create(new FlightService());
+        System.setProperty("com.sun.xml.ws.fault.SOAPFaultBuilder.disableCaptureStackTrace", "false");
         Endpoint.publish("http://0.0.0.0:8080/FlightsService",
                 new FlightService());
     }
