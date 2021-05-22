@@ -1,6 +1,6 @@
 package jaxws;
 
-import jaxws.exceptions.SQLFault;
+import jaxws.exceptions.MyFault;
 import jaxws.exceptions.SQLTransactionException;
 
 import java.sql.Connection;
@@ -35,7 +35,7 @@ public class DbMethods {
                         arrival_city, aircraft_type));
             }
         } catch (SQLException e) {
-            throw new SQLTransactionException(e.getMessage(), SQLFault.defaultInstance());
+            throw new SQLTransactionException(e.getMessage(), MyFault.defaultInstance());
         }
         return flights;
     }
@@ -57,7 +57,7 @@ public class DbMethods {
                 throw new SQLException("Запись не найдена");
             return id;
         } catch (SQLException e) {
-            throw new SQLTransactionException(e.getMessage(), SQLFault.defaultInstance());
+            throw new SQLTransactionException(e.getMessage(), MyFault.defaultInstance());
         }
     }
 
@@ -71,7 +71,7 @@ public class DbMethods {
             statement.executeUpdate(sql);
             return "completed";
         } catch (SQLException e) {
-            throw new SQLTransactionException(e.getMessage(), SQLFault.defaultInstance());
+            throw new SQLTransactionException(e.getMessage(), MyFault.defaultInstance());
         }
     }
 
@@ -81,20 +81,24 @@ public class DbMethods {
             statement.executeUpdate("delete from flights where flight_id = " + id + ";");
             return "completed";
         } catch (SQLException e) {
-            throw new SQLTransactionException(e.getMessage(), SQLFault.defaultInstance());
+            throw new SQLTransactionException(e.getMessage(), MyFault.defaultInstance());
         }
     }
 
     private String generateSelectQuery(String arg) {
-        String[] args = arg.split(" ");
+        if (arg.equals(""))
+            return "select * from flights";
+        else {
+            String[] args = arg.split(" ");
 
-        StringBuilder request = new StringBuilder().append("select * from flights where ");
-        for (int i = 0; i < args.length; i += 2) {
-            request.append(args[i]).append(" = '").append(args[i + 1]).append("'");
-            if (i < args.length - 2)
-                request.append(" and ");
+            StringBuilder request = new StringBuilder().append("select * from flights where ");
+            for (int i = 0; i < args.length; i += 2) {
+                request.append(args[i]).append(" = '").append(args[i + 1]).append("'");
+                if (i < args.length - 2)
+                    request.append(" and ");
+            }
+            request.append(";");
+            return request.toString();
         }
-        request.append(";");
-        return request.toString();
     }
 }

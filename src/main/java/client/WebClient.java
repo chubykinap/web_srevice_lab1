@@ -4,8 +4,9 @@ import client.generated.Flight;
 import client.generated.FlightService;
 import client.generated.JavaxpFlightService;
 
-import java.util.List;
-import java.util.Scanner;
+import javax.xml.ws.BindingProvider;
+import javax.xml.ws.handler.MessageContext;
+import java.util.*;
 
 public class WebClient {
     public static void main(String[] args) {
@@ -17,6 +18,7 @@ public class WebClient {
         try {
             switch (method) {
                 case "insert":
+                    addAuthHeaders(flightService);
                     System.out.println("Команда добавления\r\n" +
                             "Для использования напишите значения через запятую в одинарных кавычках в порядке\r\n" +
                             "flight_number, departure_date, departure_city, arrival_city, aircraft_type");
@@ -25,6 +27,7 @@ public class WebClient {
                     System.out.println("Id новой записи - " + result);
                     return;
                 case "update":
+                    addAuthHeaders(flightService);
                     System.out.println("Команда изменения\r\n" +
                             "Для использования напишите через пробел номер записи, поля для обновления (через запятую) " +
                             "и значения (через запятую) в порядке:\r\n" +
@@ -34,6 +37,7 @@ public class WebClient {
                     System.out.println("Статус выполнения: " + state);
                     return;
                 case "delete":
+                    addAuthHeaders(flightService);
                     System.out.println("Команда удаления\r\n" +
                             "Введите номер записи для удаления");
                     request = new Scanner(System.in).nextLine();
@@ -64,5 +68,16 @@ public class WebClient {
         } catch (Exception e) {
             System.out.println("Сообщение об ошибке от сервиса:\r\n" + e.getMessage());
         }
+    }
+
+    private static void addAuthHeaders(FlightService service){
+        Map<String, Object> auth = ((BindingProvider) service).getRequestContext();
+        auth.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, "http://0.0.0.0:8080/FlightsService?wsdl");
+
+        Map<String, List<String>> headers = new HashMap<String, List<String>>();
+        headers.put("Username", Collections.singletonList("user"));
+        headers.put("Password", Collections.singletonList("pass"));
+        auth.put(MessageContext.HTTP_REQUEST_HEADERS, headers);
+
     }
 }

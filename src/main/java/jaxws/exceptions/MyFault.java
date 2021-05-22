@@ -1,6 +1,6 @@
 package jaxws.exceptions;
 
-public class SQLFault {
+public class MyFault {
     private static final String DEFAULT_MESSAGE = "An error occurred during sql query";
 
     protected String message;
@@ -13,8 +13,8 @@ public class SQLFault {
         this.message = message;
     }
 
-    public static SQLFault defaultInstance() {
-        SQLFault fault = new SQLFault();
+    public static MyFault defaultInstance() {
+        MyFault fault = new MyFault();
         fault.message = DEFAULT_MESSAGE;
         return fault;
     }

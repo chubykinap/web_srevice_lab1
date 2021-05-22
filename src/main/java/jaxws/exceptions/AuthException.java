@@ -1,9 +1,10 @@
 package jaxws.exceptions;
 
+
 import javax.xml.ws.WebFault;
 
 @WebFault(faultBean = "jaxws.exceptions.MyFault")
-public class SQLTransactionException extends Exception {
+public class AuthException extends Exception {
     private static final long serialVersionUID = 0;
     private final MyFault fault;
 
@@ -11,12 +12,12 @@ public class SQLTransactionException extends Exception {
         return fault;
     }
 
-    public SQLTransactionException(String message, MyFault fault) {
+    public AuthException(String message, MyFault fault) {
         super(message);
         this.fault = fault;
     }
 
-    public SQLTransactionException(String message, MyFault fault, Throwable cause) {
+    public AuthException(String message, MyFault fault, Throwable cause) {
         super(message, cause);
         this.fault = fault;
     }
